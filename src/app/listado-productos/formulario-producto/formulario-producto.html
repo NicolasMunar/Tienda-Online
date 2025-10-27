@@ -1,0 +1,8 @@
+<form class="container" (submit)="agregarNuevoProducto($event)">
+    <h3 class="text-success mt-3 mb-3">{{titulo}}</h3>
+    <div class="d-flex justify-content-between align-items-center mx-auto w-50">
+        <input type="text" #descripcionProducto id="DescripcionProducto" class="form-control me-2 w-75" placeholder="Descripcion Producto" />
+        <input type="number" #precioProducto id="PrecioProducto" class="form-control me-2 w-25" placeholder="Precio" />
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </div>
+</form>
