@@ -2,10 +2,10 @@
     <h2 class="text-warning">{{titulo}}</h2>
     <ul class="list-group w-50 mx-auto">
         @for(productoElemento of listadoProductos; track productoElemento){
-        <app-producto [producto]="productoElemento"/>
+         <app-producto [producto]="productoElemento"/>
         }
     </ul>
 </div>
 <div>
-    <app-formulario-producto (nuevoProducto)="agregarNuevoProducto($event)"/>
+    <app-formulario-producto/>
 </div>
