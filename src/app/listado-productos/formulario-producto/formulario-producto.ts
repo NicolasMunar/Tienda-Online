@@ -19,17 +19,18 @@ export class FormularioProducto {
   constructor(private servicioProductos: ServicioProductos) {
 
   }
-  eliminarValores() {
+
+  eliminarValoresProducto() {
   this.descripcionProducto = "";
   this.precioProducto = 0;
   }
 
   agregarNuevoProducto(event: Event) {
-    event.preventDefault();
+    //event.preventDefault();
     if (this.descripcionProducto != null && this.precioProducto != null && !isNaN(this.precioProducto)) {
       const producto = new ProductoModelo(this.descripcionProducto, this.precioProducto);
       this.servicioProductos.addNuevoProducto(producto);
-      this.eliminarValores();
+      this.eliminarValoresProducto();
     } else {
       alert("Por favor diligencia todos los campos para agregar nuevos productos")
     }
