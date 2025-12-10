@@ -9,6 +9,8 @@ import { Producto } from './listado-productos/producto/producto';
 })
 export class ServicioProductos {
 
+  detalleProductoEmitter = new EventEmitter<ProductoModelo>();
+  
   listaProductos: ProductoModelo[]= [
     new ProductoModelo("Pantalon", 130),
     new ProductoModelo("Camisa", 130),

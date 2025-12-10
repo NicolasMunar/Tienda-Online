@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProductoModelo } from './producto.model';
+import { ServicioProductos } from '../../servicio-productos';
 
 @Component({
   selector: 'app-producto',
@@ -9,4 +10,10 @@ import { ProductoModelo } from './producto.model';
 })
 export class Producto {
   @Input() producto!: ProductoModelo;
+
+  constructor(private servicioProducto: ServicioProductos){} //inyeccion de dependencias
+
+  emitirDetalleProducto(){
+    this.servicioProducto.detalleProductoEmitter.emit(this.producto);
+  }
 }

@@ -18,18 +18,25 @@ export class ListadoProductos {
 
 
   listadoProductos: ProductoModelo[] = []
- 
+
   nuevoProducto: ProductoModelo | null = null;
   descripcionProducto: string = '';
   precioProducto: number | null = null; //Typescript permite generar tipos de datos compuestos usando el operador pipe (|). 
-                                        // En este caso, precioProducto puede ser de tipo number o null.
+  // En este caso, precioProducto puede ser de tipo number o null.
 
-  constructor(private servicioProductos: ServicioProductos) { }
+  constructor(private servicioProductos: ServicioProductos) {
+  }
 
   ngOnInit() {
     this.servicioProductos.obtenerProductosObs().subscribe((productos) => { this.listadoProductos = productos })
+
+    this.servicioProductos.detalleProductoEmitter.subscribe(
+      (producto: ProductoModelo) => alert(`Producto: ${producto.descripcion}, precio $${producto.precio}`) // `` = String literal
+    )
   }
 }
+
+
 
 
 /*
