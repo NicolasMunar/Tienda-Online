@@ -15,7 +15,7 @@ export class FormularioProducto {
   titulo = 'Detalle Producto'
   //titulo = 'Agregar Nuevo Producto'
 
-  productoID: number | null = null;
+  productoId: number | null = null;
   descripcionProducto: string = "";
   precioProducto: number = 0;
 
@@ -28,7 +28,7 @@ export class FormularioProducto {
       const producto = this.servicioProductos.getProductoById(Number(id));
       if (producto) {
         //si obtiene un producto se muestra en el formulario y se inicializan los valores.
-        this.productoID = producto.id;
+        this.productoId = producto.id;
         this.descripcionProducto = producto.descripcion;
         this.precioProducto = producto.precio;
       }
@@ -39,9 +39,9 @@ export class FormularioProducto {
   guardarProducto(event: Event) {
     //event.preventDefault();
     if (this.descripcionProducto !== null && this.descripcionProducto !== "" && this.precioProducto !== null && !isNaN(this.precioProducto) && (this.precioProducto > 0)) {
-      const producto = new ProductoModelo(this.productoID, this.descripcionProducto, this.precioProducto);
+      const producto = new ProductoModelo(this.productoId, this.descripcionProducto, this.precioProducto);
       this.servicioProductos.guardarProducto(producto);
-      this.eliminarValoresProducto();
+      this.limpiarValoresProducto();
       //Redirige al inicio
       this.router.navigate(['/']);
     } else {
@@ -54,8 +54,15 @@ export class FormularioProducto {
     this.router.navigate(['/']);
   }
 
-  eliminarValoresProducto() {
-    this.productoID = null;
+  eliminarProducto(){
+    if(this.productoId !== null){
+      this.servicioProductos.eliminarProducto(this.productoId);
+      this.limpiarValoresProducto();
+    }
+  }
+
+  limpiarValoresProducto() {
+    this.productoId = null;
     this.descripcionProducto = "";
     this.precioProducto = 0;
   }

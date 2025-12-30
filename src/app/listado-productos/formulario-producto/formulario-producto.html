@@ -10,7 +10,10 @@
        
     </div>
     <div class="dflex justify-content-center mt-3">
-            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-            <button type="button" class="btn btn-danger mx-3" (click)="cancelar()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Producto</button>
+             @if(productoId !== null){
+                <button type="button" class="btn btn-danger mx-3" (click)="eliminarProducto()">Eliminar Producto</button>
+             } 
+            <button type="button" class="btn btn-warning mx-3 mt-3" (click)="cancelar()">Cancelar</button>
     </div>
 </form>
