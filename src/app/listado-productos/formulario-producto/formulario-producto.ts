@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario-producto',
-  imports: [Producto, FormsModule],
+  imports: [FormsModule],
   templateUrl: './formulario-producto.html',
   styleUrl: './formulario-producto.css'
 })
