@@ -21,14 +21,13 @@ export class FormularioProducto {
   }
 
   eliminarValoresProducto() {
-  this.descripcionProducto = "";
-  this.precioProducto = 0;
+    this.descripcionProducto = "";
+    this.precioProducto = 0;
   }
-  
 
   agregarNuevoProducto(event: Event) {
     //event.preventDefault();
-    if (this.descripcionProducto != null && this.descripcionProducto != "" && this.precioProducto != null && !isNaN(this.precioProducto) && (this.precioProducto > 0)){
+    if (this.descripcionProducto != null && this.descripcionProducto != "" && this.precioProducto != null && !isNaN(this.precioProducto) && (this.precioProducto > 0)) {
       const producto = new ProductoModelo(this.descripcionProducto, this.precioProducto);
       this.servicioProductos.addNuevoProducto(producto);
       this.eliminarValoresProducto();
