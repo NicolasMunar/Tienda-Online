@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProductoModelo } from './producto.model';
 import { ServicioProductos } from '../../servicio-productos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto',
@@ -11,9 +12,16 @@ import { ServicioProductos } from '../../servicio-productos';
 export class Producto {
   @Input() producto!: ProductoModelo;
 
-  constructor(private servicioProducto: ServicioProductos){} //inyeccion de dependencias
+  constructor(private servicioProducto: ServicioProductos, private router:Router){} //inyeccion de dependencias
 
+  /*Metodo para el boton EDITAR
   emitirDetalleProducto(){
     this.servicioProducto.detalleProductoEmitter.emit(this.producto);
+  }
+  */
+
+  editarProducto(id: number){
+   // Pasamos el ID en la URL
+   this.router.navigate(['/editar',id])
   }
 }
