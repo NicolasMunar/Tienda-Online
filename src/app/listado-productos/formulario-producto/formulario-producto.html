@@ -1,10 +1,16 @@
-<form class="container" (submit)="agregarNuevoProducto($event)">
-    <h3 class="text-success mt-3 mb-3">{{titulo}}</h3>
-    <div class="d-flex justify-content-between align-items-center mx-auto w-50">
+<h3 class="text-success mt-3 mb-3 text-center">{{titulo}}</h3>
+
+<form class="my-4 w-50 mx-auto" 
+ #f="ngForm" (submit)="f.form.valid && guardarProducto($event)">
+    <div class="d-flex justify-content-between align-items-center">
         <input type="text" id="DescripcionProducto" name="DescripcionProducto" class="form-control me-2 w-75"
-            placeholder="Descripcion Producto" [(ngModel)]="descripcionProducto" />
+            placeholder="Descripcion Producto" [(ngModel)]="descripcionProducto" required/>
         <input type="number" id="PrecioProducto" name="PrecioProducto" class="form-control me-2 w-25"
-            placeholder="Precio" [(ngModel)]="precioProducto" />
-        <button type="submit" class="btn btn-primary">Agregar</button>
+            placeholder="Precio" [(ngModel)]="precioProducto" required/>
+       
+    </div>
+    <div class="dflex justify-content-center mt-3">
+            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            <button type="button" class="btn btn-danger mx-3" (click)="cancelar()">Cancelar</button>
     </div>
 </form>

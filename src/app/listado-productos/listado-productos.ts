@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FormularioProducto } from "./formulario-producto/formulario-producto";
 import { ProductoModelo } from './producto/producto.model';
 import { ServicioProductos } from '../servicio-productos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado-productos',
@@ -23,16 +24,24 @@ export class ListadoProductos {
   descripcionProducto: string = '';
   precioProducto: number | null = null; //Typescript permite generar tipos de datos compuestos usando el operador pipe (|). 
   // En este caso, precioProducto puede ser de tipo number o null.
-
-  constructor(private servicioProductos: ServicioProductos) {
+   
+  constructor(private servicioProductos: ServicioProductos, private router: Router) {
+    
   }
 
   ngOnInit() {
     this.servicioProductos.obtenerProductosObs().subscribe((productos) => { this.listadoProductos = productos })
 
+    /*
     this.servicioProductos.detalleProductoEmitter.subscribe(
       (producto: ProductoModelo) => alert(`Producto: ${producto.descripcion}, precio $${producto.precio}`) // `` = String literal
     )
+    */    
+  }
+
+ //RUTAS
+  agregarProducto(){
+    this.router.navigate(['agregar'])
   }
 }
 
