@@ -7,6 +7,4 @@ import {RouterModule } from "@angular/router";
   templateUrl: './error.html',
   styleUrl: './error.css'
 })
-export class Error {
-
-}
+export class Error {}
