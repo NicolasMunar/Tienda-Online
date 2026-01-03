@@ -17,8 +17,9 @@ export class ListadoProductos {
   Subtitulo = "Agregar Nuevo Producto";
 
 
-
-  listadoProductos: ProductoModelo[] = []
+ //diccionario o  mapa de objetos
+   listadoProductos: {[llave: string]: ProductoModelo} = {};
+  //listadoProductos: ProductoModelo[] = []
 
   nuevoProducto: ProductoModelo | null = null;
   descripcionProducto: string = '';
@@ -30,7 +31,9 @@ export class ListadoProductos {
   }
 
   ngOnInit() {
-    this.servicioProductos.obtenerProductosObs().subscribe((productos) => { this.listadoProductos = productos })
+    //metodo para cargar productos desde firebase.
+    this.cargarProductos();
+    //this.servicioProductos.obtenerProductosObs().subscribe((productos) => { this.listadoProductos = productos })
 
     /*
     this.servicioProductos.detalleProductoEmitter.subscribe(
@@ -39,7 +42,12 @@ export class ListadoProductos {
     */    
   }
 
- //RUTAS
+  cargarProductos(){
+    this.servicioProductos
+  }
+    
+    
+  //RUTAS
   agregarProducto(){
     this.router.navigate(['agregar'])
   }
