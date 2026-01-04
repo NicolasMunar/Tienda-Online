@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class Producto {
   @Input() producto!: ProductoModelo;
+  @Input() llaveInput!: string; 
+  //propiedad para recibir la llave del producto desde el componente padre
 
   constructor(private servicioProducto: ServicioProductos, private router:Router){} //inyeccion de dependencias
 

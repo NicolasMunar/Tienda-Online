@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado-productos',
-  imports: [FormsModule, FormularioProducto, Producto],
+  imports: [FormsModule, Producto],
   templateUrl: './listado-productos.html',
   styleUrl: './listado-productos.css'
 })
@@ -17,7 +17,7 @@ export class ListadoProductos {
   Subtitulo = "Agregar Nuevo Producto";
 
 
- //diccionario o  mapa de objetos
+ //Diccionario o  mapa de objetos
    listadoProductos: {[llave: string]: ProductoModelo} = {};
   //listadoProductos: ProductoModelo[] = []
 
@@ -42,12 +42,23 @@ export class ListadoProductos {
     */    
   }
 
-  cargarProductos(){
-    this.servicioProductos
+  //metodo de carga de productos desde firebase por medio de un observable, usando diccionario o mapa de objetos.
+  cargarProductos(){ 
+    this.servicioProductos.listarProductos().subscribe((listadoProductos: {[llave: string]: ProductoModelo}) => {
+      this.listadoProductos = listadoProductos;
+    });
   }
-    
-    
-  //RUTAS
+ 
+   obtenerLlaves(): string[]{
+     if(this.listadoProductos){
+      return Object.keys(this.listadoProductos);
+     }
+     /*si no se ha inicializado correctamente la lista de productos se retorna 
+     un arrray vacio*/
+     return [];
+   }
+  
+  //RUTAS (Routes - router)
   agregarProducto(){
     this.router.navigate(['agregar'])
   }

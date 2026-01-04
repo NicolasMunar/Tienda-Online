@@ -5,9 +5,18 @@
     </div>
 
     <ul class="list-group w-50 mx-auto">
+        @for(llave of obtenerLlaves(); track llave){
+         <app-producto [producto]="listadoProductos[llave]" [llaveInput]="llave"/>
+         <!--llaveInput. propiedad definida para recibir la llave iterada dentro
+         del componente app-producto-->
+        }
+
+        <!-- forma de iterara normalmente el listado de productos, 
+        pero no funciona porque el listadoProductos es un objeto tipo diccionario
         @for(productoElemento of listadoProductos; track productoElemento){
          <app-producto [producto]="productoElemento"/>
         }
+        -->
     </ul>
 </div>
 <div>
