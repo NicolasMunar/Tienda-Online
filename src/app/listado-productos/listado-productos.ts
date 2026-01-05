@@ -5,6 +5,7 @@ import { FormularioProducto } from "./formulario-producto/formulario-producto";
 import { ProductoModelo } from './producto/producto.model';
 import { ServicioProductos } from '../servicio-productos';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listado-productos',
@@ -19,7 +20,8 @@ export class ListadoProductos {
 
  //Diccionario o  mapa de objetos
    listadoProductos: {[llave: string]: ProductoModelo} = {};
-  //listadoProductos: ProductoModelo[] = []
+   listadoProdSuscripcion: Subscription | null = null;
+   //listadoProductos: ProductoModelo[] = []
 
   nuevoProducto: ProductoModelo | null = null;
   descripcionProducto: string = '';
@@ -33,6 +35,12 @@ export class ListadoProductos {
   ngOnInit() {
     //metodo para cargar productos desde firebase.
     this.cargarProductos();
+
+    //escuchar los cambios en la lista de productos.
+    this.listadoProdSuscripcion = this.servicioProductos.ListaProductosActualizados.subscribe((listadoProductos) => {
+      this.listadoProductos = listadoProductos;
+    });
+
     //this.servicioProductos.obtenerProductosObs().subscribe((productos) => { this.listadoProductos = productos })
 
     /*
@@ -46,6 +54,7 @@ export class ListadoProductos {
   cargarProductos(){ 
     this.servicioProductos.listarProductos().subscribe((listadoProductos: {[llave: string]: ProductoModelo}) => {
       this.listadoProductos = listadoProductos;
+      this.servicioProductos.setProductos(listadoProductos);
     });
   }
  
@@ -61,6 +70,13 @@ export class ListadoProductos {
   //RUTAS (Routes - router)
   agregarProducto(){
     this.router.navigate(['agregar'])
+  }
+
+  ngOnDestroy():void{
+    if(this.listadoProdSuscripcion !== null){
+      //permite al temrinar el uso del componente desuscribirse utilizando el SUBJECT.
+      this.listadoProdSuscripcion.unsubscribe();
+    }
   }
 }
 

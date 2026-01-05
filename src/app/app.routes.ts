@@ -8,6 +8,8 @@ export const routes: Routes = [
     { path: '', component: ListadoProductos }, //localhost:4200/
     { path: 'formulario', component: ListadoProductos }, //localhost:4200/listado
     { path: 'agregar', component: FormularioProducto },//localhost:4200/producto
+    ////Usado para el envio de ID por parametro
+    //{ path: 'editar/:id', component: FormularioProducto },//localhost:4200/producto  
     { path: 'editar/:llave', component: FormularioProducto },//localhost:4200/producto
     { path: '**', component: Error }//Control de rutas no existentes
 ];

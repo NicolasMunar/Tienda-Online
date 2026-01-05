@@ -1,7 +1,10 @@
 <li class="list-group-item text-center">
     {{producto.descripcion}},
     ${{producto.precio}}
-    <button type="Submit" class="btn btn-info ms-4" (click)="editarProducto(producto.id!)">
+    <!--definido para el envio de parametros por URL como ID
+     <button type="Submit" class="btn btn-info ms-4" (click)="editarProducto(producto.id!)">
+    -->
+    <button type="Submit" class="btn btn-info ms-4" (click)="editarProducto()">
         Editar producto
     </button>   
 </li>

@@ -12,12 +12,29 @@ export class ServicioDatos {
 
   constructor(private httpClient: HttpClient) { }
 
-//Metodo retornara un objeto de tipo Observable, en forma de llave con el valor de producto
-    
-  listarProductos(): Observable<{[llave:string]: ProductoModelo}>{
-    return this.httpClient.get<{[llave:string]: ProductoModelo}>(this.url + 'datos.json'); 
+  //Metodo retornara un objeto de tipo Observable, en forma de llave con el valor de producto
+
+  listarProductos(): Observable<{ [llave: string]: ProductoModelo }> {
+    return this.httpClient.get<{ [llave: string]: ProductoModelo }>(this.url + 'datos.json');
     //  'datos' -- nombre de la coleccion en firebase
     //  '.json' -- Formato de la respuesta
     //uso dle httpClient por medio del  metodo get para obtener informacion de la base de datos                                                                                        //en formato llav - valor
+  }
+
+
+  agregarProducto(nuevoProducto: ProductoModelo): Observable<any> {
+    /*al usar POST, por medio de firebase de genera un identificador unico por cada uno de los
+    registros a insertar, se genera el valor de la llave de forma automatica*/
+    return this.httpClient.post(`${this.url}datos.json`, nuevoProducto);
+  }
+
+  modificarProducto(producto: ProductoModelo, llave: string): Observable<any> {
+    const url_modificar = `${this.url}datos/${llave}.json`;
+    return this.httpClient.put(url_modificar, producto); //primero se ubica la llave y luego se gestiona la data en la base de datos
+  }
+
+  eliminarProducto(llaveProducto: string): Observable<any>{
+    const url_eliminar = `${this.url}datos/${llaveProducto}.json`;
+    return this.httpClient.delete(url_eliminar);
   }
 }

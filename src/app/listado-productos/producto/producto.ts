@@ -22,8 +22,16 @@ export class Producto {
   }
   */
 
+  //Metodo para EDITAR 
+  editarProducto(){
+    //ID en la URL por medio de la llave definida en el input.
+    this.router.navigate(['/editar',this.llaveInput]);
+  }
+
+  /*Metodo anterior para el boton EDITAR, por medio de router.navigate, se le envia el ID del producto a editar
   editarProducto(id: number){
    // Pasamos el ID en la URL
    this.router.navigate(['/editar',id])
   }
+   */
 }

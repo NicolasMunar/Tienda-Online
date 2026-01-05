@@ -14,33 +14,47 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FormularioProducto {
   titulo = 'Detalle Producto'
   //titulo = 'Agregar Nuevo Producto'
-
-  productoId: number | null = null;
+  
+  //productoId: number | null = null;
+  llaveProducto: string | null = null; 
   descripcionProducto: string = "";
   precioProducto: number = 0;
 
   constructor(private servicioProductos: ServicioProductos, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+     //obtener llave
+      const llave = this.route.snapshot.paramMap.get('llave');
+      if (llave) {
+        const producto = this.servicioProductos.getProductoByLlave(llave);
+        if (producto) {
+          //si obtiene un producto se muestra en el formulario y se inicializan los valores.
+          this.llaveProducto = llave;
+          this.descripcionProducto = producto.descripcion;
+          this.precioProducto = producto.precio;
+        }
+      }
+  
     //verificamos si se debe cargar un producto existente
+    /*obtener el id del producto desde la ruta
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const producto = this.servicioProductos.getProductoById(Number(id));
       if (producto) {
         //si obtiene un producto se muestra en el formulario y se inicializan los valores.
-        this.productoId = producto.id;
+        this.llaveProducto = producto.id;
         this.descripcionProducto = producto.descripcion;
         this.precioProducto = producto.precio;
       }
-    }
-
+    }*/
   }
+  
 
   guardarProducto(event: Event) {
     //event.preventDefault();
     if (this.descripcionProducto !== null && this.descripcionProducto !== "" && this.precioProducto !== null && !isNaN(this.precioProducto) && (this.precioProducto > 0)) {
-      const producto = new ProductoModelo(this.productoId, this.descripcionProducto, this.precioProducto);
-      this.servicioProductos.guardarProducto(producto);
+      const producto = new ProductoModelo(this.descripcionProducto, this.precioProducto);
+      this.servicioProductos.guardarProducto(producto,this.llaveProducto);
       this.limpiarValoresProducto();
       //Redirige al inicio
       this.router.navigate(['/']);
@@ -55,14 +69,15 @@ export class FormularioProducto {
   }
 
   eliminarProducto(){
-    if(this.productoId !== null){
-      this.servicioProductos.eliminarProducto(this.productoId);
+    if(this.llaveProducto !== null){
+      this.servicioProductos.eliminarProducto(this.llaveProducto);
       this.limpiarValoresProducto();
+      this.router.navigate(['/']);
     }
   }
 
   limpiarValoresProducto() {
-    this.productoId = null;
+    this.llaveProducto = null;
     this.descripcionProducto = "";
     this.precioProducto = 0;
   }
