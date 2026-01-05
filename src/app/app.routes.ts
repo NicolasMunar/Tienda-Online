@@ -3,6 +3,7 @@ import { FormularioProducto } from './listado-productos/formulario-producto/form
 import { Producto } from './listado-productos/producto/producto';
 import { ListadoProductos } from './listado-productos/listado-productos';
 import { Error } from './error/error';
+import { Login } from './login/login';
 
 export const routes: Routes = [
     { path: '', component: ListadoProductos }, //localhost:4200/
@@ -11,5 +12,6 @@ export const routes: Routes = [
     ////Usado para el envio de ID por parametro
     //{ path: 'editar/:id', component: FormularioProducto },//localhost:4200/producto  
     { path: 'editar/:llave', component: FormularioProducto },//localhost:4200/producto
+     {path: 'login', component: Login},
     { path: '**', component: Error }//Control de rutas no existentes
 ];
