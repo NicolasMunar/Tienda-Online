@@ -41,3 +41,13 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+##INCLUIDOS POR NMR
+# Firebase (archivos generados por deploy)
+.firebase/
+
+# Angular (builds)
+dist/
+
+# Firebase public (si usas Angular + dist)
+public/
