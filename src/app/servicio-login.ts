@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 })
 export class ServicioLogin {
 
-  token: string = '';
+  token: string | null = null;
 
   constructor(
     private router: Router,
@@ -32,4 +32,19 @@ export class ServicioLogin {
   getIdToken() {
     return this.token;
   }
+
+  isAutenticado(){
+    //Retorna true si el token no es nulo.
+    return this.token != null;
+  }
+
+  logout(){
+    const auth = this.firebaseService.auth;
+    auth.signOut()
+    .then(() => {
+      this.token = null //reinicia la variable de token al cerrar sesion.
+      this.router.navigate(['/login']);
+    })
+    .catch((error)=> console.error('Error de logout',error)); 
+  } 
 }
